@@ -21,13 +21,11 @@ public class PokemonController {
         this.pokemonService = pokemonService;
     }
 
-    
     @GetMapping("/pokemons")
     public String listarPokemons(@RequestParam(required = false) String nome, Model model) {
         List<Pokemon> pokemons;
         if (nome != null && !nome.isEmpty()) {
-            Pokemon p = pokemonService.buscarPorNome(nome);
-            pokemons = p != null ? List.of(p) : List.of();
+            pokemons = pokemonService.buscarPorNome(nome);
         } else {
             pokemons = pokemonService.listarPokemons();
         }
@@ -35,30 +33,33 @@ public class PokemonController {
         return "pokemons";
     }
 
-    
     @GetMapping("/pokemons/cadastrar")
     public String mostrarFormulario(Pokemon pokemon) {
         return "cadastrar";
     }
 
-    
     @PostMapping("/pokemons/cadastrar")
-    public String cadastrarPokemon(@Valid Pokemon pokemon, BindingResult result) {
+    public String cadastrarPokemon(@Valid Pokemon pokemon, BindingResult result, Model model) {
         if (result.hasErrors()) {
-            return "cadastrar";
+            
+            model.addAttribute("pokemon", pokemon);
+            return "cadastrar"; 
         }
-        pokemonService.salvar(pokemon); 
-        return "redirect:/pokemons"; 
+        pokemonService.salvar(pokemon);
+        return "redirect:/pokemons";
     }
-    @GetMapping("/pokemons/detalhes")
-public String detalhesPokemon(@RequestParam String nome, Model model) {
-    Pokemon pokemon = pokemonService.buscarPorNome(nome);
-    if (pokemon != null) {
-        model.addAttribute("pokemon", pokemon);
-        return "detalhes";  
-    } else {
-        return "redirect:/pokemons";  
-    }
-}
 
+    @GetMapping("/pokemons/detalhes")
+    public String detalhesPokemon(@RequestParam String nome, Model model) {
+        List<Pokemon> pokemons = pokemonService.buscarPorNome(nome);
+
+        if (pokemons != null && !pokemons.isEmpty()) {
+            model.addAttribute("pokemon", pokemons.get(0));
+            return "detalhes";
+        } else {
+            
+            model.addAttribute("erro", "Pokémon não encontrado!");
+            return "redirect:/pokemons";
+        }
+    }
 }

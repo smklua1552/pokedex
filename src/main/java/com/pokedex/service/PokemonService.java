@@ -19,7 +19,8 @@ public class PokemonService {
         return pokemonRepository.findAll();
     }
 
-    public Pokemon buscarPorNome(String nome) {
+    
+    public List<Pokemon> buscarPorNome(String nome) {
         return pokemonRepository.findByNomeIgnoreCase(nome);
     }
 

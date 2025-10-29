@@ -59,7 +59,7 @@
             100% { text-shadow: 3px 3px 0px #2a75bb, 6px 6px 0px #000000; }
         }
 
-        /* Formulário de busca */
+        
         form input[type="text"] {
             border-radius: 50px;
             padding: 10px 20px;
@@ -82,7 +82,7 @@
             transform: scale(1.05);
         }
 
-        /* Cards */
+        
         .card {
             border-radius: 20px;
             border: 3px solid #d32f2f;
@@ -117,7 +117,7 @@
             font-size: 0.85rem;
         }
 
-        /* Footer */
+        
         .footer {
             text-align: center;
             padding: 20px;
@@ -135,7 +135,7 @@
             color: inherit;
         }
 
-        /* Responsividade melhorada */
+        
         @media (max-width: 768px) {
             .card {
                 margin-bottom: 20px;
@@ -149,6 +149,17 @@
 </head>
 
 <body>
+    <div class="background-pokeball"></div>
+    <div class="container">
+
+        
+        <div style="text-align: right; margin-bottom: 10px;">
+            <a th:href="@{/pokemons/cadastrar(lang='pt')}" style="font-size:10px; margin-right:10px;">🇧🇷 Português</a>
+            <a th:href="@{/pokemons/cadastrar(lang='en')}" style="font-size:10px;">🇺🇸 English</a>
+        </div>
+
+        <h1 th:text="#{titulo.cadastrar}">Cadastrar Pokémon</h1>
+
 
 <nav class="navbar navbar-dark">
     <div class="container-fluid text-center">
@@ -159,7 +170,7 @@
 <div class="container mt-5">
     <h1 class="text-center mb-4">Escolha seu Pokémon</h1>
 
-    <!-- Campo de busca -->
+    
     <form class="mb-4 text-center" th:action="@{/pokemons}" method="get">
         <input type="text" name="nome" class="form-control d-inline-block w-50" placeholder="Buscar por nome..." th:value="${param.nome}">
         <button type="submit" class="btn btn-warning ms-2">Buscar</button>

@@ -1,10 +1,8 @@
 package com.pokedex.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 
 @Entity
 public class Pokemon {
@@ -13,17 +11,20 @@ public class Pokemon {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank(message = "O nome é obrigatório")
+    @NotBlank(message = "{pokemon.nome.notblank}")
+    @Size(max = 50, message = "{pokemon.nome.size}")
     private String nome;
 
-    @NotBlank(message = "O tipo é obrigatório")
+    @NotBlank(message = "{pokemon.tipo.notblank}")
+    @Size(max = 30, message = "{pokemon.tipo.size}")
     private String tipo;
 
-    @NotBlank(message = "A descrição é obrigatória")
+    @NotBlank(message = "{pokemon.descricao.notblank}")
+    @Size(max = 255, message = "{pokemon.descricao.size}")
     private String descricao;
 
-    @NotBlank(message = "Insira o URL da Imagem")
-    private String imagem;  // Certifique-se de usar o mesmo nome do formulário
+    @NotBlank(message = "{pokemon.imagem.notblank}")
+    private String imagem;
 
     public Pokemon() {}
 
@@ -34,7 +35,7 @@ public class Pokemon {
         this.imagem = imagem;
     }
 
-    // ===== GETTERS E SETTERS =====
+    
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
 

@@ -34,7 +34,6 @@
             width: 400px;
             text-align: center;
         }
-        
 
         h1 {
             color: #d32f2f;
@@ -51,13 +50,18 @@
             gap: 10px;
         }
 
-        form input[type="text"] {
+        form input[type="text"], form textarea {
             width: 100%;
             padding: 10px 12px;
             margin-bottom: 15px;
             border: 2px solid #d32f2f;
             border-radius: 10px;
             font-size: 12px;
+        }
+
+        form textarea {
+            resize: vertical;
+            height: 80px;
         }
 
         form .error {
@@ -103,9 +107,16 @@
     </style>
 </head>
 <body>
-    <div class="background-pokeball"></div> 
+    <div class="background-pokeball"></div>
     <div class="container">
-        <h1>Cadastrar Pokémon</h1>
+
+        <div style="text-align: right; margin-bottom: 10px;">
+            <a th:href="@{/pokemons/cadastrar(lang='pt')}" style="font-size:10px; margin-right:10px;">🇧🇷 Português</a>
+            <a th:href="@{/pokemons/cadastrar(lang='en')}" style="font-size:10px;">🇺🇸 English</a>
+        </div>
+
+        <h1 th:text="#{titulo.cadastrar}">Cadastrar Pokémon</h1>
+
         <form th:action="@{/pokemons/cadastrar}" th:object="${pokemon}" method="post">
 
             <label>
@@ -126,7 +137,7 @@
                 <img class="icon" src="https://img.icons8.com/color/48/000000/book.png"/>
                 Descrição:
             </label>
-            <input type="text" th:field="*{descricao}" />
+            <textarea th:field="*{descricao}"></textarea>
             <div th:if="${#fields.hasErrors('descricao')}" class="error" th:errors="*{descricao}"></div>
 
             <label>

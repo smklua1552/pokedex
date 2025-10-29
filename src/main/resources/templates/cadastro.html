@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" lang="pt-br">
 
 <head>
     <meta charset="UTF-8">
-    <title>Pokédex - Login</title>
+    <title>Pokédex - Cadastro</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
 
@@ -12,6 +12,7 @@
             font-family: 'Press Start 2P', cursive;
             margin: 0;
             padding: 0;
+
             display: flex;
             justify-content: center;
             align-items: center;
@@ -20,20 +21,28 @@
         }
 
         h1 {
-            font-size: 2rem;
+            font-size: 1.5rem;
             color: #ffffff;
             text-align: center;
             text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.6);
             margin-bottom: 20px;
         }
 
-        .login-container {
+        .cadastro-container {
             background-color: #fff;
             padding: 30px 40px;
             border-radius: 20px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
             width: 350px;
             text-align: center;
+        }
+
+        label {
+            font-size: 10px;
+            display: block;
+            text-align: left;
+            color: #333;
+            margin-top: 10px;
         }
 
         input[type="text"],
@@ -52,6 +61,12 @@
             margin-bottom: 10px;
         }
 
+        .success {
+            color: #2e7d32;
+            font-size: 10px;
+            margin-bottom: 10px;
+        }
+
         button {
             width: 100%;
             padding: 12px;
@@ -62,6 +77,7 @@
             font-size: 12px;
             cursor: pointer;
             transition: 0.3s;
+            margin-top: 10px;
         }
 
         button:hover {
@@ -85,36 +101,39 @@
             background-size: contain;
             opacity: 0.7;
         }
+
+        a {
+            color: #1976d2;
+            text-decoration: none;
+            font-size: 10px;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
     </style>
 </head>
 
 <body>
     <div class="background-pokeball"></div>
 
-    <div class="login-container">
-        <h1 style="color: #3b3b3b;">Login</h1>
+    <div class="cadastro-container">
+        <h1 style="color: #3b3b3b;">Cadastro</h1>
 
-
-
-        
         <div th:if="${mensagemErro}" class="error" th:text="${mensagemErro}"></div>
+        <div th:if="${mensagemSucesso}" class="success" th:text="${mensagemSucesso}"></div>
 
-        
-        <form th:action="@{/login}" th:object="${usuario}" method="post">
-            <input type="text" placeholder="Username" th:field="*{username}" />
+        <form th:action="@{/cadastro}" th:object="${usuario}" method="post">
+            <input type="text" placeholder="Escolha um usuário" th:field="*{username}" />
             <div th:if="${#fields.hasErrors('username')}" class="error" th:errors="*{username}"></div>
 
-            <input type="password" placeholder="Password" th:field="*{password}" />
+            <input type="password" placeholder="Crie uma senha" th:field="*{password}" />
             <div th:if="${#fields.hasErrors('password')}" class="error" th:errors="*{password}"></div>
 
-            <button type="submit">Entrar</button>
+            <button type="submit">Cadastrar</button>
         </form>
-        <div>
-    <p>Não tem uma conta? 
-       <a th:href="@{/cadastro}">Cadastre-se aqui</a>
-    </p>
-</div>
 
+        <p style="margin-top: 10px;">Já tem conta? <a th:href="@{/login}">Voltar ao login</a></p>
     </div>
 
     <div class="footer">
