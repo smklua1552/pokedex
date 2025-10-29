@@ -158,3 +158,9 @@ Caused by: org.h2.mvstore.MVStoreException: The file is locked: C:/Users/USER/Do
 	at org.h2.mvstore.SingleFileStore.open(SingleFileStore.java:81)
 	at org.h2.mvstore.MVStore.<init>(MVStore.java:286)
 	... 50 more
+2025-10-29 17:24:25.372790-03:00 jdbc[159]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "select * from usuario[*]'"; SQL statement:
+select * from usuario' [42000-232]
+2025-10-29 17:26:06.339130-03:00 jdbc[159]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "select * from usuario[*]:"; SQL statement:
+select * from usuario: [42000-232]
